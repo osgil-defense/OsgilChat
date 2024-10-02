@@ -12,6 +12,7 @@ import SubRow from '~/components/Chat/Messages/SubRow';
 import { useMessageActions } from '~/hooks';
 import { cn, logger } from '~/utils';
 import store from '~/store';
+import Eyebrow from '../Eyebrow';
 
 type MessageRenderProps = {
   message?: TMessage;
@@ -123,6 +124,7 @@ const MessageRender = memo(
           <div className="flex-col gap-1 md:gap-3">
             <div className="flex max-w-full flex-grow flex-col gap-0">
               {msg.plugin && <Plugin plugin={msg.plugin} />}
+              {msg.model && <Eyebrow model={msg.model} />}
               <MessageContent
                 ask={ask}
                 edit={edit}

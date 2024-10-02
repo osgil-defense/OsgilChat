@@ -4,6 +4,7 @@ import type { TMessageProps } from '~/common';
 import MessageRender from './ui/MessageRender';
 // eslint-disable-next-line import/no-cycle
 import MultiMessage from './MultiMessage';
+import Eyebrow from './Eyebrow';
 
 const MessageContainer = React.memo(
   ({
@@ -42,12 +43,17 @@ export default function Message(props: TMessageProps) {
 
   const { children, messageId = null } = message;
 
+  console.log('Rendering message:', message);
+  console.log('Is assistant:', message?.role === 'assistant');
+  console.log('Model:', message?.model);
+
   return (
     <>
       <MessageContainer handleScroll={handleScroll}>
         {showSibling ? (
           <div className="m-auto my-2 flex justify-center p-4 py-2 md:gap-6">
             <div className="flex w-full flex-row flex-wrap justify-between gap-1 md:max-w-5xl md:flex-nowrap md:gap-2 lg:max-w-5xl xl:max-w-6xl">
+            {message?.model && <Eyebrow model={message.model} />}
               <MessageRender
                 {...props}
                 message={message}

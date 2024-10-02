@@ -14,19 +14,20 @@ COPY --chown=node:node . .
 
 RUN \
     # Allow mounting of these files, which have no default
-    touch .env ; \
+    touch .env && \
     # Create directories for the volumes to inherit the correct permissions
-    mkdir -p /app/client/public/images /app/api/logs ; \
-    npm config set fetch-retry-maxtimeout 600000 ; \
-    npm config set fetch-retries 5 ; \
-    npm config set fetch-retry-mintimeout 15000 ; \
-    npm install --no-audit; \
-    # React client build
-    NODE_OPTIONS="--max-old-space-size=2048" npm run frontend; \
-    npm prune --production; \
-    npm cache clean --force
+    mkdir -p /app/client/public/images /app/api/logs && \
+    npm config set fetch-retry-maxtimeout 600000 && \
+    npm config set fetch-retries 5 && \
+    npm config set fetch-retry-mintimeout 15000 && \
+    npm install && \
+    echo "Building frontend..." && \
+    npm run frontend && \
+    echo "Contents of /app/client after frontend build:" && \
+    ls -la /app/client
 
-RUN mkdir -p /app/client/public/images /app/api/logs
+# Verify files before starting
+RUN echo "Final contents of /app/client:" && ls -la /app/client
 
 # Node API setup
 EXPOSE 3080

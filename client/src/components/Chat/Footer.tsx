@@ -19,6 +19,7 @@ export default function Footer({ className }: { className?: string }) {
       target={privacyPolicy.openNewTab === true ? '_blank' : undefined}
       rel="noreferrer"
     >
+      Fuck You
       {localize('com_ui_privacy_policy')}
     </a>
   );
@@ -30,6 +31,7 @@ export default function Footer({ className }: { className?: string }) {
       target={termsOfService.openNewTab === true ? '_blank' : undefined}
       rel="noreferrer"
     >
+      Fuck You
       {localize('com_ui_terms_of_service')}
     </a>
   );
@@ -46,7 +48,7 @@ export default function Footer({ className }: { className?: string }) {
       ? config.customFooter
       : '[LibreChat ' +
         Constants.VERSION +
-        '](https://librechat.ai) - ' +
+        '](https://www.linkedin.com/in/al1y3vk/) - ' +
         localize('com_ui_latest_footer')
   ).split('|');
 
@@ -94,6 +96,7 @@ export default function Footer({ className }: { className?: string }) {
         return (
           <React.Fragment key={`footer-element-${index}`}>
             {contentRender}
+            <p>Fuck You</p>
             {!isLastElement && (
               <div key={`separator-${index}`} className="h-2 border-r-[1px] border-border-medium" />
             )}

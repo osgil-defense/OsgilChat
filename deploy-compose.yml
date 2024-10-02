@@ -1,10 +1,10 @@
 version: "3.8"
 services:
   api:
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile.multi
-    #   target: api-build
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api-build
     image: ghcr.io/danny-avila/librechat-dev-api:latest
     container_name: LibreChat-API
     ports:
