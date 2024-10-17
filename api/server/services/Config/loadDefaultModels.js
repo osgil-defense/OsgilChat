@@ -6,6 +6,7 @@ const {
   getBedrockModels,
   getAnthropicModels,
   getChatGPTBrowserModels,
+  getOsgilModels,
 } = require('~/server/services/ModelService');
 
 /**
@@ -27,6 +28,7 @@ async function loadDefaultModels(req) {
   });
   const assistants = await getOpenAIModels({ assistants: true });
   const azureAssistants = await getOpenAIModels({ azureAssistants: true });
+  const osgil = await getOsgilModels();
 
   return {
     [EModelEndpoint.openAI]: openAI,
@@ -40,6 +42,7 @@ async function loadDefaultModels(req) {
     [EModelEndpoint.assistants]: assistants,
     [EModelEndpoint.azureAssistants]: azureAssistants,
     [EModelEndpoint.bedrock]: getBedrockModels(),
+    [EModelEndpoint.osgil]: osgil,
   };
 }
 

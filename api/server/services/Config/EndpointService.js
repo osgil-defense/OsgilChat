@@ -50,5 +50,6 @@ module.exports = {
     ),
     /* key will be part of separate config */
     [EModelEndpoint.agents]: generateConfig(process.env.I_AM_A_TEAPOT),
+    [EModelEndpoint.osgil]: generateConfig("test", "ws://localhost:8889", EModelEndpoint.osgil),
   },
 };

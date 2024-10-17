@@ -13,6 +13,8 @@ async function endpointController(req, res) {
   const defaultEndpointsConfig = await loadDefaultEndpointsConfig(req);
   const customConfigEndpoints = await loadConfigEndpoints(req);
 
+  console.log("HEYAHEY", defaultEndpointsConfig, customConfigEndpoints);
+
   /** @type {TEndpointsConfig} */
   const mergedConfig = { ...defaultEndpointsConfig, ...customConfigEndpoints };
   if (mergedConfig[EModelEndpoint.assistants] && req.app.locals?.[EModelEndpoint.assistants]) {

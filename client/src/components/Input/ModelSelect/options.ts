@@ -8,6 +8,7 @@ import Google from './Google';
 import ChatGPT from './ChatGPT';
 import Anthropic from './Anthropic';
 import PluginsByIndex from './PluginsByIndex';
+import Osgil from './Osgil';
 
 export const options: { [key: string]: FC<TModelSelectProps> } = {
   [EModelEndpoint.openAI]: OpenAI,
@@ -18,6 +19,7 @@ export const options: { [key: string]: FC<TModelSelectProps> } = {
   [EModelEndpoint.google]: Google,
   [EModelEndpoint.anthropic]: Anthropic,
   [EModelEndpoint.chatGPTBrowser]: ChatGPT,
+  [EModelEndpoint.osgil]: Osgil,
 };
 
 export const multiChatOptions = {

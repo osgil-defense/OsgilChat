@@ -6,6 +6,7 @@ const bingAI = require('./bingAI');
 const anthropic = require('./anthropic');
 const gptPlugins = require('./gptPlugins');
 const askChatGPTBrowser = require('./askChatGPTBrowser');
+const osgil = require('./osgil');
 const { isEnabled } = require('~/server/utils');
 const { EModelEndpoint } = require('librechat-data-provider');
 const {
@@ -47,5 +48,6 @@ router.use(`/${EModelEndpoint.anthropic}`, anthropic);
 router.use(`/${EModelEndpoint.google}`, google);
 router.use(`/${EModelEndpoint.bingAI}`, bingAI);
 router.use(`/${EModelEndpoint.custom}`, custom);
+router.use(`/${EModelEndpoint.osgil}`, osgil);
 
 module.exports = router;

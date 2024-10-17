@@ -26,6 +26,7 @@ export enum EModelEndpoint {
   agents = 'agents',
   custom = 'custom',
   bedrock = 'bedrock',
+  osgil = 'osgil',
 }
 
 export const paramEndpoints = new Set<EModelEndpoint | string>([
@@ -1002,6 +1003,28 @@ export const anthropicSchema = tConversationSchema
     maxContextTokens: true,
   })
   .transform((obj) => removeNullishValues(obj))
+  .catch(() => ({}));
+
+export const osgilSchema = tConversationSchema
+  .pick({
+    model: true,
+    modelLabel: true,
+    promptPrefix: true,
+    temperature: true,
+    top_p: true,
+    presence_penalty: true,
+    frequency_penalty: true,
+    resendFiles: true,
+    artifacts: true,
+    imageDetail: true,
+    stop: true,
+    iconURL: true,
+    greeting: true,
+    spec: true,
+    maxContextTokens: true,
+    max_tokens: true,
+  })
+  .transform((obj: Partial<TConversation>) => removeNullishValues(obj))
   .catch(() => ({}));
 
 export const compactChatGPTSchema = tConversationSchema

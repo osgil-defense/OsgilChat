@@ -18,6 +18,7 @@ import {
   chatGPTBrowserSchema,
   compactPluginsSchema,
   compactAssistantSchema,
+  osgilSchema,
 } from './schemas';
 import { bedrockInputSchema } from './bedrock';
 import { alternateName } from './config';
@@ -31,7 +32,8 @@ type EndpointSchema =
   | typeof gptPluginsSchema
   | typeof assistantSchema
   | typeof compactAgentsSchema
-  | typeof bedrockInputSchema;
+  | typeof bedrockInputSchema
+  | typeof osgilSchema;
 
 const endpointSchemas: Record<EModelEndpoint, EndpointSchema> = {
   [EModelEndpoint.openAI]: openAISchema,
@@ -46,6 +48,7 @@ const endpointSchemas: Record<EModelEndpoint, EndpointSchema> = {
   [EModelEndpoint.azureAssistants]: assistantSchema,
   [EModelEndpoint.agents]: compactAgentsSchema,
   [EModelEndpoint.bedrock]: bedrockInputSchema,
+  [EModelEndpoint.osgil]: osgilSchema,
 };
 
 // const schemaCreators: Record<EModelEndpoint, (customSchema: DefaultSchemaValues) => EndpointSchema> = {
@@ -66,6 +69,7 @@ export function getEnabledEndpoints() {
     EModelEndpoint.gptPlugins,
     EModelEndpoint.anthropic,
     EModelEndpoint.bedrock,
+    EModelEndpoint.osgil,
   ];
 
   const endpointsEnv = process.env.ENDPOINTS ?? '';
@@ -192,7 +196,7 @@ export const parseConvo = ({
   let schema = endpointSchemas[endpoint] as EndpointSchema | undefined;
 
   if (!schema && !endpointType) {
-    throw new Error(`Unknown endpoint: ${endpoint}`);
+    throw new Error(`Unknown endpoint: ${endpoint} ${schema} ${endpointType}`);
   } else if (!schema && endpointType) {
     schema = endpointSchemas[endpointType];
   }
@@ -296,6 +300,10 @@ export const getResponseSender = (endpointOption: t.TEndpointOption): string => 
     return 'AI';
   }
 
+  if (endpoint === EModelEndpoint.osgil) {
+    return modelLabel ?? 'OSGIL';
+  }
+
   return '';
 };
 
@@ -324,6 +332,7 @@ const compactEndpointSchemas: Record<string, CompactEndpointSchema> = {
   [EModelEndpoint.anthropic]: anthropicSchema,
   [EModelEndpoint.chatGPTBrowser]: compactChatGPTSchema,
   [EModelEndpoint.gptPlugins]: compactPluginsSchema,
+  [EModelEndpoint.osgil]: osgilSchema,
 };
 
 export const parseCompactConvo = ({
@@ -346,7 +355,7 @@ export const parseCompactConvo = ({
   let schema = compactEndpointSchemas[endpoint];
 
   if (!schema && !endpointType) {
-    throw new Error(`Unknown endpoint: ${endpoint}`);
+    throw new Error(`Unknown endpoint: ${endpoint} ${schema} ${endpointType}`);
   } else if (!schema && endpointType) {
     schema = compactEndpointSchemas[endpointType];
   }

@@ -30,7 +30,7 @@ const EndpointItems: FC<{
               <div key={`endpoint-${endpoint}`}>
                 <MenuItem
                   key={`endpoint-item-${endpoint}`}
-                  title={alternateName[endpoint] || endpoint}
+                  title={(alternateName[endpoint] || endpoint)}
                   value={endpoint}
                   selected={selected === endpoint}
                   data-testid={`endpoint-item-${endpoint}`}

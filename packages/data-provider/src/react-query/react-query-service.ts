@@ -218,7 +218,11 @@ export const useGetEndpointsQuery = <TData = t.TEndpointsConfig>(
 ): QueryObserverResult<TData> => {
   return useQuery<t.TEndpointsConfig, unknown, TData>(
     [QueryKeys.endpoints],
-    () => dataService.getAIEndpoints(),
+    async () => {
+      const endpoints = await dataService.getAIEndpoints();
+      console.log('AI Endpoints:', endpoints);
+      return endpoints;
+    },
     {
       staleTime: Infinity,
       refetchOnWindowFocus: false,

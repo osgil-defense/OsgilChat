@@ -21,6 +21,7 @@ router.post(
   buildEndpointOption,
   setHeaders,
   async (req, res, next) => {
+    console.log('OPENAI ROUTE');
     await AskController(req, res, next, initializeClient, addTitle);
   },
 );

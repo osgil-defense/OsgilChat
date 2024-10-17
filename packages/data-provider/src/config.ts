@@ -562,6 +562,7 @@ export const defaultEndpoints: EModelEndpoint[] = [
   EModelEndpoint.anthropic,
   EModelEndpoint.custom,
   EModelEndpoint.bedrock,
+  EModelEndpoint.osgil,
 ];
 
 export const alternateName = {
@@ -577,6 +578,7 @@ export const alternateName = {
   [EModelEndpoint.anthropic]: 'Anthropic',
   [EModelEndpoint.custom]: 'Custom',
   [EModelEndpoint.bedrock]: 'AWS Bedrock',
+  [EModelEndpoint.osgil]: 'Osgil',
 };
 
 const sharedOpenAIModels = [
@@ -672,6 +674,7 @@ export const defaultModels = {
     'gpt-3.5-turbo-instruct',
   ],
   [EModelEndpoint.bedrock]: bedrockModels,
+  [EModelEndpoint.osgil]: ['openai', 'claude-3.5-sonnet', 'llama3.1-8b'],
 };
 
 const fitlerAssistantModels = (str: string) => {
@@ -707,6 +710,7 @@ export const EndpointURLs: { [key in EModelEndpoint]: string } = {
   [EModelEndpoint.assistants]: '/api/assistants/v2/chat',
   [EModelEndpoint.agents]: `/api/${EModelEndpoint.agents}/chat`,
   [EModelEndpoint.bedrock]: `/api/${EModelEndpoint.bedrock}/chat`,
+  [EModelEndpoint.osgil]: `/api/ask/${EModelEndpoint.osgil}`,
 };
 
 export const modularEndpoints = new Set<EModelEndpoint | string>([

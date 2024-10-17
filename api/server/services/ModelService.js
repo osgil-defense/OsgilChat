@@ -256,6 +256,15 @@ const getBedrockModels = () => {
   return models;
 };
 
+const getOsgilModels = () => {
+  let models = defaultModels[EModelEndpoint.osgil];
+  if (process.env.OSGIL_MODELS) {
+    models = splitAndTrim(process.env.OSGIL_MODELS);
+  }
+
+  return models;
+};
+
 module.exports = {
   fetchModels,
   splitAndTrim,
@@ -264,4 +273,5 @@ module.exports = {
   getChatGPTBrowserModels,
   getAnthropicModels,
   getGoogleModels,
+  getOsgilModels,
 };

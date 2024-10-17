@@ -4,6 +4,7 @@ const PluginsClient = require('./PluginsClient');
 const GoogleClient = require('./GoogleClient');
 const TextStream = require('./TextStream');
 const AnthropicClient = require('./AnthropicClient');
+const OsgilClient = require('./OsgilClient');
 const toolUtils = require('./tools/util');
 
 module.exports = {
@@ -13,5 +14,6 @@ module.exports = {
   GoogleClient,
   TextStream,
   AnthropicClient,
+  OsgilClient,
   ...toolUtils,
 };

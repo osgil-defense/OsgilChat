@@ -1,6 +1,6 @@
 const express = require('express');
 const AskController = require('~/server/controllers/AskController');
-const { addTitle, initializeClient } = require('~/server/services/Endpoints/anthropic');
+const { initializeClient, addTitle } = require('~/server/services/Endpoints/osgil');
 const {
   setHeaders,
   handleAbort,
@@ -20,9 +20,14 @@ router.post(
   buildEndpointOption,
   setHeaders,
   async (req, res, next) => {
-    console.log('ANTHROPIC ROUTE');
+    console.log('OSGIL ROUTE');
     await AskController(req, res, next, initializeClient, addTitle);
   },
 );
+
+router.post('/test', (req, res) => {
+  console.log('[TESTLOG] TEST ROUTE');
+  res.send('Hello World');
+});
 
 module.exports = router;

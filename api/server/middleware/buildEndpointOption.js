@@ -10,6 +10,7 @@ const openAI = require('~/server/services/Endpoints/openAI');
 const agents = require('~/server/services/Endpoints/agents');
 const custom = require('~/server/services/Endpoints/custom');
 const google = require('~/server/services/Endpoints/google');
+const osgil = require('~/server/services/Endpoints/osgil');
 const enforceModelSpec = require('./enforceModelSpec');
 const { handleError } = require('~/server/utils');
 
@@ -24,10 +25,12 @@ const buildFunction = {
   [EModelEndpoint.gptPlugins]: gptPlugins.buildOptions,
   [EModelEndpoint.assistants]: assistants.buildOptions,
   [EModelEndpoint.azureAssistants]: azureAssistants.buildOptions,
+  [EModelEndpoint.osgil]: osgil.buildOptions,
 };
 
 async function buildEndpointOption(req, res, next) {
   const { endpoint, endpointType } = req.body;
+  console.log('[TESTLOG] BUILD ENDPOINT OPTION', endpoint, endpointType);
   const parsedBody = parseCompactConvo({ endpoint, endpointType, conversation: req.body });
 
   if (req.app.locals.modelSpecs?.list && req.app.locals.modelSpecs?.enforce) {

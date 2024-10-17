@@ -87,6 +87,9 @@ export default function useSSE(
 
     const payloadData = createPayload(submission);
     let { payload } = payloadData;
+    console.log('GOT PAYLOOOAAADDD', payload);
+    console.log('DATA', payload.endpoint);
+    console.log('SERVER', payloadData.server);
     if (isAssistantsEndpoint(payload.endpoint) || isAgentsEndpoint(payload.endpoint)) {
       payload = removeNullishValues(payload);
     }
@@ -175,6 +178,7 @@ export default function useSSE(
 
     events.onerror = function (e: MessageEvent) {
       console.log('error in server stream.');
+      console.log(e);
       (startupConfig?.checkBalance ?? false) && balanceQuery.refetch();
 
       let data: TResData | undefined = undefined;

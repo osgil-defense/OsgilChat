@@ -13,7 +13,7 @@ const { logViolation } = require('~/cache');
 const validateModel = async (req, res, next) => {
   const { model, endpoint } = req.body;
   if (!model) {
-    return handleError(res, { text: 'Model not provided' });
+    return handleError(res, { text: 'Model not provided ' + model + ' ' + endpoint });
   }
 
   const modelsConfig = await getModelsConfig(req);

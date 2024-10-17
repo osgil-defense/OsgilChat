@@ -166,6 +166,10 @@ const MessageEndpointIcon: React.FC<IconProps> = (props) => {
           : `rgba(0, 163, 255, ${button === true ? 0.75 : 1})`,
       name: 'ChatGPT',
     },
+    [EModelEndpoint.osgil]: {
+      icon: <img src="/assets/osgil.png" alt="Osgil Icon" />,
+      name: 'Osgil',
+    },
     [EModelEndpoint.custom]: {
       icon: <CustomMinimalIcon size={size * 0.7} />,
       name: 'Custom',

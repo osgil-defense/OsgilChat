@@ -8,10 +8,14 @@ const { config } = require('./EndpointService');
  * @returns {Promise<Object.<string, EndpointWithOrder>>} An object whose keys are endpoint names and values are objects that contain the endpoint configuration and an order.
  */
 async function loadDefaultEndpointsConfig(req) {
+  console.log("LOADING DEFAULT ENDPOINTS CONFIG", config);
+
   const { google, gptPlugins } = await loadAsyncEndpoints(req);
   const { assistants, azureAssistants, bingAI, azureOpenAI, chatGPTBrowser } = config;
 
   const enabledEndpoints = getEnabledEndpoints();
+
+  console.log("ENABLED ENDPOINTS", enabledEndpoints);
 
   const endpointConfig = {
     [EModelEndpoint.openAI]: config[EModelEndpoint.openAI],
@@ -25,6 +29,7 @@ async function loadDefaultEndpointsConfig(req) {
     [EModelEndpoint.gptPlugins]: gptPlugins,
     [EModelEndpoint.anthropic]: config[EModelEndpoint.anthropic],
     [EModelEndpoint.bedrock]: config[EModelEndpoint.bedrock],
+    [EModelEndpoint.osgil]: config[EModelEndpoint.osgil],
   };
 
   const orderedAndFilteredEndpoints = enabledEndpoints.reduce((config, key, index) => {
@@ -33,6 +38,8 @@ async function loadDefaultEndpointsConfig(req) {
     }
     return config;
   }, {});
+
+  console.log("ORDERED AND FILTERED ENDPOINTS", orderedAndFilteredEndpoints);
 
   return orderedAndFilteredEndpoints;
 }

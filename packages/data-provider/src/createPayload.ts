@@ -10,6 +10,8 @@ export default function createPayload(submission: t.TSubmission) {
     endpointType?: s.EModelEndpoint;
   };
 
+  console.log("[TESTLOG] GOT USER MESSAGE", userMessage);
+
   let server = EndpointURLs[endpointType ?? endpoint];
 
   if (isEdited && s.isAssistantsEndpoint(endpoint)) {
