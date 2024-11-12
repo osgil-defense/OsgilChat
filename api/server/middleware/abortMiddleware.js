@@ -148,6 +148,7 @@ const createAbortController = (req, res, getAbortData, getReqData) => {
 };
 
 const handleAbortError = async (res, req, error, data) => {
+  console.log("[HANDLE ABORT ERROR] ERROR", error);
   if (error?.message?.includes('base64')) {
     logger.error('[handleAbortError] Error in base64 encoding', {
       ...error,

@@ -127,8 +127,11 @@ const AskController = async (req, res, next, initializeClient, addTitle) => {
       },
     };
 
+    console.log("[ASK CONTROLLER] SENDING MESSAGE", text, messageOptions);
     let response = await client.sendMessage(text, messageOptions);
+    console.log("[ASK CONTROLLER] RESPONSE", response);
     response.endpoint = endpointOption.endpoint;
+    console.log("[ASK CONTROLLER] RESPONSE ENDPOINT", response.endpoint);
 
     const { conversation = {} } = await client.responsePromise;
     conversation.title =
@@ -172,6 +175,8 @@ const AskController = async (req, res, next, initializeClient, addTitle) => {
     }
   } catch (error) {
     const partialText = getText && getText();
+    console.log("[ASK CONTROLLER] ERROR", error);
+    console.log("[ASK CONTROLLER] PARTIAL TEXT", partialText);
     handleAbortError(res, req, error, {
       partialText,
       conversationId,
